@@ -53,6 +53,7 @@ public class MeteorController : MonoBehaviour
         blastInstance.transform.RotateAroundLocal(new Vector3(0, 0, 1), angle);
 
         blastInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(50f * Mathf.Cos(angle), 50f * Mathf.Sin(angle)));
+        Destroy(blastInstance, 5);
     }
 
     public static float AngleInRad(Vector3 vec1, Vector3 vec2)

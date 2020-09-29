@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
     private Animator animator;
+    public Canvas canvas;
 
     void Start()
     {
@@ -45,4 +46,15 @@ public class PlayerController : MonoBehaviour
 
         transform.position = pos;
     }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "blast")
+        {
+            canvas.enabled = true;
+            Destroy(collision.gameObject);
+        }
+    }
+
 }
