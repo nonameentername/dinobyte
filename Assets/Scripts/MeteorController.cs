@@ -43,17 +43,20 @@ public class MeteorController : MonoBehaviour
 
     void CreateBlast(GameObject first, GameObject second)
     {
-        Vector3 v = -(first.transform.position - second.transform.position);
-        Vector3 target_position = first.transform.position + Random.value * v;
+        if(player.GetComponent<PlayerController>().isAlive)
+        {
+            Vector3 v = -(first.transform.position - second.transform.position);
+            Vector3 target_position = first.transform.position + Random.value * v;
 
-        GameObject blastInstance = Instantiate(blast, target_position, Quaternion.identity);
+            GameObject blastInstance = Instantiate(blast, target_position, Quaternion.identity);
 
-        float angle = AngleInRad(blastInstance.transform.position, player.transform.position);
+            float angle = AngleInRad(blastInstance.transform.position, player.transform.position);
 
-        blastInstance.transform.RotateAroundLocal(new Vector3(0, 0, 1), angle);
+            blastInstance.transform.RotateAroundLocal(new Vector3(0, 0, 1), angle);
 
-        blastInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(50f * Mathf.Cos(angle), 50f * Mathf.Sin(angle)));
-        Destroy(blastInstance, 5);
+            blastInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(50f * Mathf.Cos(angle), 50f * Mathf.Sin(angle)));
+            Destroy(blastInstance, 5);
+        }
     }
 
     public static float AngleInRad(Vector3 vec1, Vector3 vec2)

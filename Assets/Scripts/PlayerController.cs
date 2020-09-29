@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     private Animator animator;
     public Canvas canvas;
+    public GameObject impact;
+    public bool isAlive = true;
 
     void Start()
     {
@@ -54,6 +56,10 @@ public class PlayerController : MonoBehaviour
         {
             canvas.enabled = true;
             Destroy(collision.gameObject);
+
+            GameObject impactInstance = Instantiate(impact, transform.position, Quaternion.identity);
+            Destroy(impactInstance, 5);
+            isAlive = false;
         }
     }
 
