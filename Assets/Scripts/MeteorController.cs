@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MeteorController : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class MeteorController : MonoBehaviour
 
     public GameObject blast;
     public GameObject player;
+
+    public Text text;
+
+    int count = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +61,9 @@ public class MeteorController : MonoBehaviour
 
             blastInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(50f * Mathf.Cos(angle), 50f * Mathf.Sin(angle)));
             Destroy(blastInstance, 5);
+
+            text.text = "Score - " + count;
+            count++;
         }
     }
 

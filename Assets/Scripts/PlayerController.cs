@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
     private Animator animator;
-    public Canvas canvas;
+
+    public Canvas gameOver;
+    public Canvas score;
+
     public GameObject impact;
     public bool isAlive = true;
 
@@ -54,7 +57,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "blast")
         {
-            canvas.enabled = true;
+            //score.enabled = false;
+            gameOver.enabled = true;
+
             Destroy(collision.gameObject);
 
             GameObject impactInstance = Instantiate(impact, transform.position, Quaternion.identity);
