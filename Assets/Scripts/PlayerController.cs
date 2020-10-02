@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        gameOver.enabled = false;
     }
 
     // Update is called once per frame
