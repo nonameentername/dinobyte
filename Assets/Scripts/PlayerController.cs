@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     public Canvas gameOver;
     public Canvas score;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         gameOver.enabled = false;
     }
 
@@ -28,14 +30,14 @@ public class PlayerController : MonoBehaviour
         {
             pos.x -= speed * Time.deltaTime;
             animator.SetFloat("Horizontal", 1);
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = true;
+
         }
         else if (Input.GetKey("d"))
         {
             pos.x += speed * Time.deltaTime;
             animator.SetFloat("Horizontal", 1);
-
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = false;
         }
         else
         {
