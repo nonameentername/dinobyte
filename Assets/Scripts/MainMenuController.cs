@@ -28,6 +28,11 @@ public class MainMenuController : MonoBehaviour
 #endif
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void LoadScene()
     {
         SceneManager.LoadScene(1);

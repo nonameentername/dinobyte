@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioData;
 
     public Canvas gameOver;
     public Canvas score;
+    public Camera camera;
 
     public GameObject impact;
     public bool isAlive = true;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioData = GetComponent<AudioSource>();
         gameOver.enabled = false;
     }
 
@@ -52,6 +55,29 @@ public class PlayerController : MonoBehaviour
             pos.y += speed * Time.deltaTime;
         }
 
+        var left = Camera.main.ViewportToWorldPoint(Vector3.zero).x;
+        var right = Camera.main.ViewportToWorldPoint(Vector3.one).x;
+        var top = Camera.main.ViewportToWorldPoint(Vector3.zero).y;
+        var bottom = Camera.main.ViewportToWorldPoint(Vector3.one).y;
+
+        if (pos.x < left)
+        {
+            pos.x = left;
+        }
+        else if (pos.x > right)
+        {
+            pos.x = right;
+        }
+
+        if (pos.y < top)
+        {
+            pos.y = top;
+        } 
+        else if (pos.y > bottom)
+        {
+            pos.y = bottom;
+        }
+
         transform.position = pos;
     }
 
@@ -68,6 +94,7 @@ public class PlayerController : MonoBehaviour
             GameObject impactInstance = Instantiate(impact, transform.position, Quaternion.identity);
             Destroy(impactInstance, 5);
             isAlive = false;
+            audioData.Play(0);
         }
     }
 
